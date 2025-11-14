@@ -1,1 +1,10 @@
 // About the Task
+
+Task 3: Nested Data Extraction
+Goal: Safely handle deeply nested API responses
+
+ Create mock data with structure: user.profile.settings.theme.colors.primary
+ Extract nested values using optional chaining (?.)
+ Use destructuring to get multiple nested values
+ Create a utility function getSafeValue(obj, path, defaultValue)
+ Display a profile card showing extracted nested data
