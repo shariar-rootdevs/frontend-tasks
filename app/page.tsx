@@ -1,17 +1,44 @@
-export default function page() {
-  console.log('')
+'use client'
+import { User } from '@/type'
+import { useEffect, useState } from 'react'
+import UserList from './components/UserList'
+export default function Page() {
+  const [userData, setUserData] = useState<User[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
 
-  function shariar() {
-    console.log('This is my name ')
-  }
+  useEffect(() => {
+    const controller = new AbortController()
+    async function fetchData() {
+      try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users`, {
+          signal: controller.signal,
+        })
+        if (!response.ok) {
+          throw new Error('Failed to Fetch Data')
+        }
+        const data: User[] = await response.json()
+        setUserData(data)
+        console.log('data is', data)
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error?.message)
+        } else {
+          setError('Something Went Wrong')
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  function Myname() {
-    console.log('This is my name')
-  }
+    fetchData()
 
-  if (true) {
-    console.log('This Statement')
-  }
+    return () => controller.abort()
+  }, [])
 
-  return <div>First e</div>
+  return (
+    <div className='h-screen justify-center p-6'>
+      <UserList error={error} loading={loading} data={userData} />
+    </div>
+  )
 }
