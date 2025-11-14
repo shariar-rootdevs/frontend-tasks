@@ -1,1 +1,10 @@
 // About the Task
+
+Task 2: Blog by Author
+Goal: Group blog posts by author
+
+ Fetch posts from JSONPlaceholder (/posts and /users)
+ Group posts by userId using JavaScript's reduce() or Map
+ Display author name as section header
+ Show each author's posts in a collapsible accordion
+ Add post count badge next to author name
