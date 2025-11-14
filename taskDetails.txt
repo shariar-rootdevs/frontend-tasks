@@ -1,1 +1,9 @@
 // About the Task
+Task 1: User Directory
+Goal: Display a list of users with profile information
+
+ 1.Fetch users from JSONPlaceholder API (/users)
+ 2.Create a UserCard component showing: name, email, phone, company name
+ 3.Add a loading spinner while fetching
+ 4.Handle API errors with a friendly message
+ Style with grid layout (responsive: 1 col mobile, 3 cols desktop)
