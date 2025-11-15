@@ -1,1 +1,9 @@
 // About the Task
+Task 4: Polymorphic Card Renderer
+Goal: Render different components based on content type
+
+ Create data array with mixed types: {type: 'video', ...}, {type: 'article', ...}
+ Build VideoCard, ArticleCard, and ImageCard components
+ Create a CardRenderer that conditionally renders based on type
+ Add TypeScript discriminated unions for type safety
+ Display all cards in a masonry-style grid
