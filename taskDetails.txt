@@ -1,1 +1,9 @@
 // About the Task
+Task 11: Button Component Library
+Goal: Build a reusable button system
+
+ Create Button component with variants: primary, secondary, danger, outline
+ Add sizes: small, medium, large
+ Support loading state with spinner
+ Support disabled state
+ Create demo page showing all combinations
