@@ -7,6 +7,7 @@ type ButtonProps = {
   disabled?: boolean
   loading?: boolean
   fullWidth?: boolean
+  handleFunction?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export default function Button({
@@ -16,6 +17,7 @@ export default function Button({
   disabled = false,
   loading = false,
   fullWidth = false,
+  handleFunction,
 }: ButtonProps) {
   let sizeClasses = ''
 
@@ -52,7 +54,12 @@ export default function Button({
 
   return (
     <div>
-      <button disabled={disabled || loading} className={buttonCls} aria-busy={loading}>
+      <button
+        onClick={handleFunction}
+        disabled={disabled || loading}
+        className={buttonCls}
+        aria-busy={loading}
+      >
         <div className='flex gap-1 items-center justify-center'>
           {buttonText}
           {loading && (
