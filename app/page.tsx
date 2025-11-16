@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>First Page</div>
+  return <div>This is task6</div>
 }
