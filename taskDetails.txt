@@ -1,1 +1,9 @@
 // About the Task
+Task 5: Sortable Product Table
+Goal: Build an interactive data table
+
+ Fetch products from FakeStore API
+ Display in table: image, title, price, category, rating
+ Implement sort by clicking column headers (price, rating, title)
+ Add ascending/descending toggle with arrow icons
+ Highlight sorted column with different background color
