@@ -1,1 +1,10 @@
 // About the Task
+Task 12: Modal Component
+Goal: Reusable modal with animations
+
+ Build Modal component with open/close state
+ Add backdrop click to close
+ Add ESC key to close
+ Animate entrance/exit with CSS transitions
+ Include header, body, footer slots
+ Create demo with "Open Modal" button
