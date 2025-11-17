@@ -1,5 +1,8 @@
 import { Heart, Share2 } from 'lucide-react'
 import Image from 'next/image'
+import { useState } from 'react'
+
+type CartAction = 'add' | 'remove'
 
 type ProductCardProps = {
   id: number
@@ -8,7 +11,7 @@ type ProductCardProps = {
   description: string
   price: number
   isCartItem?: boolean
-  onAddToCart: (id: number, type: string) => void
+  onAddToCart: (id: number, type: CartAction) => void
 }
 
 export default function ProductCard({
@@ -20,18 +23,35 @@ export default function ProductCard({
   onAddToCart,
   isCartItem = false,
 }: ProductCardProps) {
+  const [wishlistActive, setWishlistActive] = useState(false)
+
   function handleShare() {
     alert(`Share this product: ${title}`)
+  }
+
+  function toggleWishlist() {
+    setWishlistActive(prev => !prev)
   }
 
   return (
     <div className='bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition p-3'>
       {/* Image Section */}
       <div className='relative h-[260px] w-full'>
-        <Image src={image} alt={title} fill className='object-contain p-4' />
+        <Image src={image} alt={title} fill className='object-contain p-4' priority />
 
-        <button className='absolute top-3 right-3 bg-white rounded-full p-2 shadow-md hover:scale-110 transition cursor-pointer'>
-          <Heart className='w-5 h-5' fill='white' stroke='#666' />
+        {/* Wishlist Button */}
+        <button
+          aria-label={wishlistActive ? 'Remove from wishlist' : 'Add to wishlist'}
+          onClick={toggleWishlist}
+          className={`absolute top-3 right-3 rounded-full p-2 shadow-md transition-transform cursor-pointer hover:scale-110 bg-white ${
+            wishlistActive ? 'text-red-500' : 'text-gray-600'
+          }`}
+        >
+          <Heart
+            className='w-5 h-5'
+            fill={wishlistActive ? 'red' : 'none'}
+            stroke={wishlistActive ? 'red' : '#666'}
+          />
         </button>
       </div>
 
@@ -47,36 +67,26 @@ export default function ProductCard({
           <button
             onClick={handleShare}
             className='flex items-center gap-1 text-sm text-blue-600 hover:underline cursor-pointer'
+            aria-label={`Share ${title}`}
           >
-            <Share2 className='w-4 h-4' /> Share
+            <Share2 className='w-4 h-4' />
+            Share
           </button>
         </div>
 
         {/* Add to Cart Button */}
         <button
           onClick={() => onAddToCart(id, isCartItem ? 'remove' : 'add')}
-          className={`
-            cursor-pointer
-            w-full 
-            text-white 
-            py-2 
-            rounded-lg 
-            mt-3 
-            font-semibold
+          className={`w-full py-2 mt-3 rounded-lg font-semibold text-white shadow-sm transition hover:shadow
             ${
               isCartItem
-                ? 'bg-red-500 hover:bg-red-600 active:bg-red-700   '
-                : 'bg-green-500 hover:bg-green-600 active:bg-green-700   '
-            } 
-            
-            
-            
-            transition 
-            shadow-sm 
-            hover:shadow
+                ? 'bg-red-500 hover:bg-red-600 active:bg-red-700'
+                : 'bg-green-500 hover:bg-green-600 active:bg-green-700'
+            }
           `}
+          aria-label={isCartItem ? 'Remove from cart' : 'Add to cart'}
         >
-          {isCartItem ? 'Remove From Cart' : 'Remove From Cart '}
+          {isCartItem ? 'Remove From Cart' : 'Add To Cart'}
         </button>
       </div>
     </div>

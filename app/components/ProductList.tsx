@@ -2,14 +2,17 @@ import { Product } from '@/type'
 import Error from './Error'
 import Loading from './Loading'
 import ProductCard from './ProductCard'
+
+type CartAction = 'add' | 'remove'
+
 type ProductListPropsType = {
   product: Product[]
   loading: boolean
   error: string | null
   cartProduct: Product[]
-  setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>
-  onAddToCart: (id: number, type: string) => void
+  onAddToCart: (id: number, type: CartAction) => void
 }
+
 export default function ProductList({
   product,
   loading,
@@ -24,11 +27,12 @@ export default function ProductList({
     return <Loading />
   }
 
-  if (!loading && !error && product.length === 0)
+  if (!loading && !error && product.length === 0) {
     return <p className='text-center text-gray-500 mt-4'>No Product found.</p>
+  }
 
   return (
-    <div className=''>
+    <div>
       <p className='text-lg font-bold'>Product List</p>
       <div className='mt-3 grid grid-cols-1 xl:grid-cols-2 gap-4'>
         {product.map(p => (
