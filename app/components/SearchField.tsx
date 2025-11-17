@@ -3,6 +3,7 @@
 import { Movie } from '@/type' // Apnar Movie type import korben
 import { Search } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useDebounce } from '../hook/useDeboucne'
 import MovieSearchCard from './MovieSearchCard'
 
 export default function SearchField() {
@@ -11,8 +12,11 @@ export default function SearchField() {
   const [result, setResults] = useState<Movie[]>([])
   const [searchText, setSearchText] = useState<string>('')
 
+  // Use debounce hook here
+  const debouncedSearchText = useDebounce(searchText, 500)
+
   useEffect(() => {
-    if (searchText.trim() === '') {
+    if (debouncedSearchText.trim() === '') {
       setResults([])
       setLoading(false)
       setError(undefined)
@@ -27,7 +31,7 @@ export default function SearchField() {
         const response = await fetch(
           `https://api.themoviedb.org/3/search/movie?api_key=${
             process.env.NEXT_PUBLIC_TMDB_API_KEY
-          }&query=${encodeURIComponent(searchText)}`,
+          }&query=${encodeURIComponent(debouncedSearchText)}`,
           { signal: controller.signal }
         )
         if (!response.ok) {
@@ -47,7 +51,7 @@ export default function SearchField() {
     fetchMovies()
 
     return () => controller.abort()
-  }, [searchText])
+  }, [debouncedSearchText])
 
   return (
     <div className='w-full flex justify-center'>
