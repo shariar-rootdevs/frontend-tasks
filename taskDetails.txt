@@ -1,1 +1,9 @@
 // About the Task
+Task 15: Tooltip Component
+Goal: Hover-triggered info popup
+
+ Create Tooltip wrapper component
+ Show tooltip on hover with 300ms delay
+ Support top, bottom, left, right positions
+ Add arrow pointer
+ Demo with multiple tooltips on a page
