@@ -7,3 +7,13 @@ Goal: Live search with API calls
  Display results in a dropdown/list below input
  Handle "No results found" state
 
+// TMDB: API ACCESS TOKEN
+eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlM2YwZWY0OTJhMGRmMmQ5ZDM3ZDI3ZWZiMWJjYjI2ZCIsIm5iZiI6MTc2MzM5NTIxMS43Miwic3ViIjoiNjkxYjQ2OGIzOGY2MGU5OWJiNTJlYzM1Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.rf_TbqO8ZDP5nz1wAGprYG9p26ttKr0AUopTREarfJw
+
+API Key
+e3f0ef492a0df2d9d37d27efb1bcb26d
+
+
+// TMDB Account :
+shariar05rootdevs@gmail.com
+duke10176261
