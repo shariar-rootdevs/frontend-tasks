@@ -9,6 +9,7 @@ export default function Page() {
   const [product, setProduct] = useState<Product[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const [cartProduct, setCartProducts] = useState<Product[]>([])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -40,14 +41,37 @@ export default function Page() {
 
   console.log('Products data', product)
 
+  function handleAddToCart(id: number, type: string) {
+    const findProduct = cartProduct.find(p => p.id === id)
+
+    if (type == 'add') {
+      if (!findProduct) {
+        const targetProduct = product.find(p => p.id === id)
+        if (targetProduct) {
+          setCartProducts(prev => [...prev, targetProduct])
+        }
+      }
+    } else {
+      const filteredProducts = cartProduct.filter(p => p.id != id)
+      setCartProducts(filteredProducts)
+    }
+  }
+
   return (
     <div className='h-screen p-6 grid grid-cols-12 gap-4'>
       <div className='col-span-8 border-r-2 border-gray-400'>
-        <ProductList product={product} loading={loading} error={error} />
+        <ProductList
+          product={product}
+          loading={loading}
+          error={error}
+          cartProduct={cartProduct}
+          setCartProducts={setCartProducts}
+          onAddToCart={handleAddToCart}
+        />
       </div>
 
       <div className='col-span-4'>
-        <Cart />
+        <Cart onAddToCart={handleAddToCart} cartProduct={cartProduct} />
       </div>
     </div>
   )

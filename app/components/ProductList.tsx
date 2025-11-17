@@ -6,8 +6,16 @@ type ProductListPropsType = {
   product: Product[]
   loading: boolean
   error: string | null
+  cartProduct: Product[]
+  setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>
+  onAddToCart: (id: number, type: string) => void
 }
-export default function ProductList({ product, loading, error }: ProductListPropsType) {
+export default function ProductList({
+  product,
+  loading,
+  error,
+  onAddToCart,
+}: ProductListPropsType) {
   if (error) {
     return <Error error={error} />
   }
@@ -26,10 +34,12 @@ export default function ProductList({ product, loading, error }: ProductListProp
         {product.map(p => (
           <ProductCard
             key={p.id}
+            id={p.id}
             title={p.title}
             image={p.image}
             description={p.description}
             price={p.price}
+            onAddToCart={onAddToCart}
           />
         ))}
       </div>
