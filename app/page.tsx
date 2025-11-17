@@ -1,3 +1,4 @@
+'use client'
 export default function Page() {
-  return <div>First Page</div>
+  return <div>This is for task10</div>
 }
