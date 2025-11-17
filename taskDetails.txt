@@ -1,1 +1,9 @@
-// About the Task
+Task 16: Debounced Search
+Goal: Live search with API calls
+
+ Create search input for movies (use OMDB or TMDB API)
+ Debounce input by 500ms using custom hook or lodash
+ Show loading indicator while searching
+ Display results in a dropdown/list below input
+ Handle "No results found" state
+
