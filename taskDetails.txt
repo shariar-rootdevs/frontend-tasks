@@ -1,1 +1,10 @@
 // About the Task
+
+Task 14: Product Card Component
+Goal: Reusable card with actions
+
+ Display: image, title, description, price
+ Add "Add to Cart" button
+ Add "Wishlist" heart icon toggle
+ Add "Share" button (just show alert for now)
+ Include badge for "Sale" or "New" items
