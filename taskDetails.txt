@@ -1,1 +1,9 @@
 // About the Task
+Task 17: Paginated API Display
+Goal: Navigate through pages of data
+
+ Fetch posts from JSONPlaceholder with _page and _limit params
+ Display 10 posts per page
+ Add "Previous" and "Next" buttons
+ Show current page number and total pages
+ Disable buttons appropriately (e.g., "Previous" on page 1)
