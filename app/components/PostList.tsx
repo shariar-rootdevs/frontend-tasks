@@ -8,9 +8,21 @@ type PostListType = {
   posts: Post[]
   loading: boolean
   error: string | null
+  totalItems: number
+  limit: number
+  currentPage: number
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function PostList({ posts, loading, error }: PostListType) {
+export default function PostList({
+  posts,
+  loading,
+  error,
+  totalItems,
+  limit,
+  currentPage,
+  setCurrentPage,
+}: PostListType) {
   if (loading) return <Loading />
   if (error) return <Error error={error} />
   if (!loading && !error && posts.length === 0)
@@ -24,7 +36,12 @@ export default function PostList({ posts, loading, error }: PostListType) {
         ))}
       </div>
 
-      <Pagination />
+      <Pagination
+        totalItems={totalItems}
+        limit={limit}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   )
 }

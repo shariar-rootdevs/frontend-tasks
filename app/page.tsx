@@ -10,6 +10,8 @@ export default function Page() {
   const [error, setError] = useState<string | null>(null)
   const [posts, setPosts] = useState<Post[]>([])
   const [limit, setLimit] = useState(10)
+  const [totalItems, setTotalItems] = useState<number>(0)
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   const currentSearchParams = useSearchParams()
 
@@ -23,10 +25,18 @@ export default function Page() {
 
     async function fetchData() {
       try {
-        const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`, {
-          signal: controller.signal,
-        })
+        const res = await fetch(
+          `https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${currentPage}`,
+          {
+            signal: controller.signal,
+          }
+        )
         const data = await res.json()
+        const totalCount = res.headers.get('x-total-count') // string
+        if (totalCount) {
+          setTotalItems(Number(totalCount))
+        }
+
         setPosts(data)
       } catch (err) {
         if (err instanceof Error) setError(err.message)
@@ -39,12 +49,22 @@ export default function Page() {
     fetchData()
 
     return () => controller.abort()
-  }, [limit])
+  }, [limit, currentPage])
+
+  console.log('Total numbers are', totalItems)
 
   return (
     <div className='h-screen p-3 space-y-3'>
       <p className='text-2xl font-bold'>Users Posts</p>
-      <PostList posts={posts} error={error} loading={loading} />
+      <PostList
+        totalItems={totalItems}
+        limit={limit}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        posts={posts}
+        error={error}
+        loading={loading}
+      />
     </div>
   )
 }
